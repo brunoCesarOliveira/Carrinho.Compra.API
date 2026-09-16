@@ -1,0 +1,56 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build
+[Bb]in/
+[Oo]bj/
+
+# Test Results
+[Tt]est[Rr]esult*/
+*.trx
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ASP.NET
+wwwroot/lib/
+
+# Entity Framework
+*.db
+*.db-shm
+*.db-wal
+
+# User Secrets
+secrets.json
+
+# Environment variables
+.env
+.env.*
+
+# Publish
+publish/
+*.Publish.xml
+*.pubxml
+
+# Docker
+docker-compose.override.yml
