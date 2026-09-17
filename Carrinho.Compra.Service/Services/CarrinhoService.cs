@@ -1,68 +1,83 @@
-﻿using AutoMapper;
+﻿
+
+using AutoMapper;
 using Carrinho.Compra.Domain.Entities;
+using Carrinho.Compra.Domain.Interface;
 using Carrinho.Compra.Domain.Interface.Repository;
 using Carrinho.Compra.Domain.Interface.Service;
 using Carrinho.Compra.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace Carrinho.Compra.Service.Services
 {
     public class CarrinhoService : IService<CarrinhoModel>
     {
-        public IRepository<Domain.Entities.CarrinhoEntity> _repository;
-        public IMapper _mapper;
+        private readonly IRepository<CarrinhoEntity> _repository;
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CarrinhoService(IRepository<Domain.Entities.CarrinhoEntity> repository, IMapper mapper)
+        public CarrinhoService(
+                IRepository<CarrinhoEntity> repository,
+                IUnitOfWork unitOfWork,
+                IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<CarrinhoModel?> Get(Guid Id)
+        public async Task<CarrinhoModel?> Get(Guid id)
         {
-            var entity = await _repository.Get(Id);
+            var entity = await _repository.Get(id ,query =>
+                                             query.Include(x => x.Itens)
+                                                  .ThenInclude(x => x.Produto)
+                                                  .Include(x => x.Cupom));
+
             if (entity == null)
                 return null;
-            
+
             return _mapper.Map<CarrinhoModel>(entity);
         }
 
         public async Task<IEnumerable<CarrinhoModel>> GetAll()
         {
-            var cesta = await _repository.GetAll();
+            var entities = await _repository.GetAll();
 
-            if (cesta == null)
-                return new List<CarrinhoModel>();
-
-            return _mapper.Map<IEnumerable<CarrinhoModel>>(cesta);
+            return _mapper.Map<IEnumerable<CarrinhoModel>>(entities);
         }
 
-        public async Task<CarrinhoModel> Add(CarrinhoModel cestaModel)
+        public async Task<CarrinhoModel> Add(CarrinhoModel model)
         {
-            var carrinho = _mapper.Map<CarrinhoEntity>(cestaModel);
-            var model = await _repository.Add(carrinho);
+            var entity = _mapper.Map<CarrinhoEntity>(model);
 
-            return _mapper.Map<CarrinhoModel>(model);
+            foreach (var item in entity.Itens)
+            {
+                item.CarrinhoId = entity.Id;
+            }
+
+            var result = await _repository.Add(entity);
+            await _unitOfWork.CommitAsync();
+
+            return _mapper.Map<CarrinhoModel>(result);
         }
 
-        public async Task<bool> Delete(Guid Id)
+        public async Task<CarrinhoModel?> Update(CarrinhoModel model)
         {
-            var cesta = await Delete(Id);
 
-            if (!cesta)
-                return false;
-            return true;
+            var entity = _mapper.Map<CarrinhoEntity>(model);
 
+            var result = await _repository.Update(entity);
 
+            if (result == null)
+                return null;
 
+            return _mapper.Map<CarrinhoModel>(result);
         }
 
-        public async Task<CarrinhoModel> Update(CarrinhoModel model)
+        public async Task<bool> Delete(Guid id)
         {
-            var cestaModel = _mapper.Map<CarrinhoEntity>(model);
-            var cesta = await _repository.Update(cestaModel);
-
-            return _mapper.Map<CarrinhoModel>(cesta);
-
+            return await _repository.Delete(id);
         }
 
     }
