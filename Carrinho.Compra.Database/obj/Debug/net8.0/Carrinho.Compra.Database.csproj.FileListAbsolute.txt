@@ -1,0 +1,12 @@
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\bin\Debug\net8.0\Carrinho.Compra.Database.deps.json
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\bin\Debug\net8.0\Carrinho.Compra.Database.dll
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\bin\Debug\net8.0\Carrinho.Compra.Database.pdb
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\Carrinho.Compra.Database.GeneratedMSBuildEditorConfig.editorconfig
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\Carrinho.Compra.Database.AssemblyInfoInputs.cache
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\Carrinho.Compra.Database.AssemblyInfo.cs
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\Carrinho.Compra.Database.csproj.CoreCompileInputs.cache
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\Carrinho.Compra.Database.sourcelink.json
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\Carrinho.Compra.Database.dll
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\refint\Carrinho.Compra.Database.dll
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\Carrinho.Compra.Database.pdb
+D:\projetoCarrinho\BackEnd\Carrinho.Compra.API\Carrinho.Compra.Database\obj\Debug\net8.0\ref\Carrinho.Compra.Database.dll
