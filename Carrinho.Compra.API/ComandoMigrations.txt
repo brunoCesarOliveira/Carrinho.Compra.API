@@ -1,0 +1,3 @@
+Criar o banco de dados primeiro para rodar as migarations 
+Add-Migration "Criando as Tabelas" -Project Carrinho.Compra.Repository -StartupProject Carrinho.Compra.API
+Update-Database	 -Project Carrinho.Compra.Repository -StartupProject Carrinho.Compra.API

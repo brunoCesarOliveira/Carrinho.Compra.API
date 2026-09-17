@@ -6,44 +6,43 @@ namespace Carrinho.Compra.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CarrinhoController : ControllerBase
+    public class ProdutoController : ControllerBase
     {
-        private readonly IService<CarrinhoModel> _service;
-        public CarrinhoController(IService<CarrinhoModel> service)
+        private readonly IService<ProdutoModel> _service;
+        public ProdutoController(IService<ProdutoModel> service)
         {
             _service = service;
         }
-
+       
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var carrinho = await _service.Get(id);
-            if (carrinho == null)
+            var produto = await _service.Get(id);
+            if (produto == null)
                 return NotFound();
 
-            return Ok(carrinho);
+            return Ok(produto);
         }
 
-        [HttpGet]
+        [HttpGet("produtos")]
         public async Task<IActionResult> GetAll()
         {
-            var carrinho = await _service.GetAll();
-            return Ok(carrinho);
+            var produtos = await _service.GetAll();
+            return Ok(produtos);
         }
 
 
         [HttpPost("Adicionar")]
-        public async Task<IActionResult> Add(CarrinhoModel carrinhoModel)
+        public async Task<IActionResult> Add(ProdutoModel produtoModel)
         {
-            var model = await _service.Add(carrinhoModel);
+            var model = await _service.Add(produtoModel);
 
-            return CreatedAtAction(nameof(Get),new { id = model.Id },model);
+            return CreatedAtAction(nameof(Get),new { id = produtoModel.Id },produtoModel);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(CarrinhoModel carrinhoModel)
-        {
-            var model = await _service.Update(carrinhoModel);
+        public async Task<IActionResult> Update(ProdutoModel produtoModel){
+            var model = await _service.Update(produtoModel);
 
             if (model == null)
                 return NotFound();
@@ -60,7 +59,7 @@ namespace Carrinho.Compra.API.Controllers
                 return NotFound();
 
             return NoContent();
-        }
-
+        }       
+       
     }
 }
