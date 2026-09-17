@@ -15,15 +15,6 @@ namespace Carrinho.Compra.Repository.Ioc
             _context = context;          
         }
 
-        public IRepository<TEntity> Repository<TEntity>() where TEntity : class
-        {
-            var type = typeof(TEntity);
-
-            var repository = new Repository<TEntity>(_context);
-            _repositories.Add(type, repository);
-
-            return (IRepository<TEntity>)_repositories[type];  
-        }
 
         public async Task<bool> CommitAsync()
         {
