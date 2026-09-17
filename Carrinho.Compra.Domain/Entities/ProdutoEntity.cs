@@ -2,11 +2,10 @@
 {
     public class ProdutoEntity :EntityBase
     {
-        public string Nome { get; set; }    =string.Empty;
-        public string Descricao { get; set; } = string.Empty;
-        public decimal Preco { get;set; }
-        public int Estoque { get; set; }
+        public string DescricaoProduto { get; set; } = string.Empty;
+        public int QuantidadeEstoque { get; set; }
+        public required decimal PrecoLiquido { get; set; }  
         public string ImageUrl { get; set; } = string.Empty;   
-        public ICollection<ItemCestaEntity> ItensCarrinho { get; set; } = new List<ItemCestaEntity>();    
+        public ICollection<ItemCarrinhoEntity> ItensCarrinho { get; set; } = new List<ItemCarrinhoEntity>();    
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Carrinho.Compra.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6bd0259dc5f0039f70c08b8f56deba12f73ff84")]
 [assembly: System.Reflection.AssemblyProductAttribute("Carrinho.Compra.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Carrinho.Compra.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

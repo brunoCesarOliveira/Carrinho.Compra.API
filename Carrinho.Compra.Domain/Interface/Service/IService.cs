@@ -1,11 +1,11 @@
 ﻿namespace Carrinho.Compra.Domain.Interface.Service
 {
-    public  interface IService<TEntityModel> where TEntityModel :class 
+    public  interface IService<TModel> where TModel : class
     {
-        Task<TEntityModel?> Get(Guid id);
-        Task<IEnumerable<TEntityModel>> GetAll();
-        Task<TEntityModel> Add(TEntityModel model);
-        Task<bool> Delete(Guid Id);
-        Task<TEntityModel> Update(TEntityModel model);
+        Task<TModel?> Get(Guid id);
+        Task<IEnumerable<TModel>> GetAll();
+        Task<TModel> Add(TModel model);
+        Task<bool> Delete(Guid id);
+        Task<TModel> Update(TModel model);
     }
 }
