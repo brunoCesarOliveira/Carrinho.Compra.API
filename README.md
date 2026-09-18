@@ -199,6 +199,10 @@ ou a versão utilizada pelo projeto.
 ### PostgreSQL
 
 Verifique se o PostgreSQL está instalado e em execução.
+
+Abra o Package Manager Console -> Selecione a Camada Carrinho.Compra.Repositoy
+Utilize o update-database
+
 Os dados serão preechidos automaticamente pelas Migrations do projeto
 O projeto utiliza:
 
