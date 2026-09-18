@@ -8,6 +8,7 @@ using Carrinho.Compra.Repository.Context;
 using Carrinho.Compra.Repository.Ioc;
 using Carrinho.Compra.Service.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,7 +26,13 @@ var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+{
+
+    options.UseNpgsql(connectionString);
+    options.EnableDetailedErrors();
+    options.EnableSensitiveDataLogging();
+
+});
 
 //Respository
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -34,9 +41,10 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ICupomRepository, CupomRepository>();
+builder.Services.AddScoped<IItemCarrinhoRepository, ItemCarrinhoRepository>();  
 
 //Serices
-builder.Services.AddScoped<IService<CarrinhoModel>, CarrinhoService>();
+builder.Services.AddScoped<ICarrinhoService, CarrinhoService>();
 builder.Services.AddScoped<IService<ProdutoModel>, ProdutoService>();
 builder.Services.AddScoped<IService<CupomModel>, CupomService>();
 

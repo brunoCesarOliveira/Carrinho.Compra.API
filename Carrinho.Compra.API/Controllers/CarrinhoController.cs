@@ -8,8 +8,8 @@ namespace Carrinho.Compra.API.Controllers
     [Route("api/[controller]")]
     public class CarrinhoController : ControllerBase
     {
-        private readonly IService<CarrinhoModel> _service;
-        public CarrinhoController(IService<CarrinhoModel> service)
+        private readonly ICarrinhoService _service;
+        public CarrinhoController(ICarrinhoService service)
         {
             _service = service;
         }
@@ -37,10 +37,12 @@ namespace Carrinho.Compra.API.Controllers
         {
             var model = await _service.Add(carrinhoModel);
 
-            return CreatedAtAction(nameof(Get),new { id = model.Id },model);
+            return CreatedAtAction(nameof(Get), new { id = model.Id }, model);
+
         }
 
-        [HttpPut]
+
+        [HttpPut("Atualizar")]
         public async Task<IActionResult> Update(CarrinhoModel carrinhoModel)
         {
             var model = await _service.Update(carrinhoModel);
@@ -60,6 +62,29 @@ namespace Carrinho.Compra.API.Controllers
                 return NotFound();
 
             return NoContent();
+        }
+
+        [HttpPost("Finalizar/{id}")]
+        public async Task<IActionResult> FinalizarCompra(Guid id)
+        {
+          
+            try
+            {
+                await _service.FinalizarCompra(id);
+
+                return Ok(new
+                {
+                    mensagem = "Compra finalizada com sucesso."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = ex.Message
+                });
+            }
+
         }
 
     }
