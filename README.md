@@ -199,13 +199,13 @@ ou a versão utilizada pelo projeto.
 ### PostgreSQL
 
 Verifique se o PostgreSQL está instalado e em execução.
-
+Os dados serão preechidos automaticamente pelas Migrations do projeto
 O projeto utiliza:
 
 ```text
 Host: localhost
 Porta: 5432
-Usuário: postgres
+Usuário: root
 ```
 
 ---
