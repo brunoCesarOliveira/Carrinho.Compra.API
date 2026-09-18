@@ -10,33 +10,49 @@ namespace Carrinho.Compra.Repository.Context
         public DbSet<ItemCarrinhoEntity> ItensCarrinho { get; set; }
 
 
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(EntityBase).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                                .Property("Id")
+                                .ValueGeneratedNever();
+                }
+            }
+            ;
 
-            modelBuilder.Entity<CarrinhoEntity>();
+
+            modelBuilder.Entity<CarrinhoEntity>()
+                        .HasMany(c => c.Itens)
+                        .WithOne(i => i.Carrinho)
+                        .HasForeignKey(i => i.CarrinhoId)
+                        .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<CarrinhoEntity>()
+                        .HasOne(c => c.Cupom)
+                        .WithMany()
+                        .HasForeignKey(c => c.CupomId)
+                        .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<ItemCarrinhoEntity>()
+                        .HasOne(i => i.Produto)
+                        .WithMany(p => p.ItensCarrinho)
+                        .HasForeignKey(i => i.ProdutoId)
+                        .OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<ProdutoEntity>()
-                .Property(x => x.PrecoLiquido)
-                .HasPrecision(18, 2);
-
-
-            modelBuilder.Entity<ItemCarrinhoEntity>()
-               .HasOne(x => x.Carrinho)
-               .WithMany(x => x.Itens)
-               .HasForeignKey(x => x.Id)
-               .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ItemCarrinhoEntity>()
-                .HasOne(x => x.Produto)
-                .WithMany(x => x.ItensCarrinho)
-                .HasForeignKey(x => x.ProdutoId)
-                .OnDelete(DeleteBehavior.Restrict);
-         
+                        .Property(p => p.PrecoLiquido)
+                        .HasPrecision(18, 2);
 
             ProdutoSeed.SeedProdutos(modelBuilder);
             CuponsSeed.SeedCupons(modelBuilder);

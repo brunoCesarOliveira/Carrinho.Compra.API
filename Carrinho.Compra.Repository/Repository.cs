@@ -15,7 +15,9 @@ namespace Carrinho.Compra.Repository
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
-             
+
+       
+
         public async Task<TEntity?> Get(Guid id, Func<IQueryable<TEntity>, IQueryable<TEntity>>? includes =null)
         {
             IQueryable<TEntity> query = _dbSet;
@@ -44,6 +46,7 @@ namespace Carrinho.Compra.Repository
                 return null;
 
             _context.Entry(entityExists).CurrentValues.SetValues(entity);
+
             return entityExists;
 
         }

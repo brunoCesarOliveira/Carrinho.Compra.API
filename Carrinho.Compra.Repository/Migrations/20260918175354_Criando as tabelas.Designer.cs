@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Carrinho.Compra.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260917015656_Criando as Tabelas")]
-    partial class CriandoasTabelas
+    [Migration("20260918175354_Criando as tabelas")]
+    partial class Criandoastabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,35 +25,9 @@ namespace Carrinho.Compra.Repository.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Carrinho.Compra.Domain.Entities.CarrinhoEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CupomId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal>("Subtotal")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CupomId");
-
-                    b.ToTable("Carrinhos");
-                });
-
             modelBuilder.Entity("Carrinho.Compra.Domain.Entities.CupomEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<bool>("Ativo")
@@ -72,16 +46,16 @@ namespace Carrinho.Compra.Repository.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4525535d-d7cb-4c69-9c2c-3c82d760171d"),
+                            Id = new Guid("49e16d11-29ef-4dc2-8252-70e1603fd2b6"),
                             Ativo = true,
-                            CodigoCupom = new Guid("4838c500-9136-4a9c-bc68-f9e0f0f87e10"),
+                            CodigoCupom = new Guid("1aeb24f1-5f02-41db-adfc-fb8e948ac9e3"),
                             PercentualDesconto = 10m
                         },
                         new
                         {
-                            Id = new Guid("43a2a5bd-f379-4558-8ac9-f637973fc154"),
+                            Id = new Guid("d37f362c-f1f6-4c84-92f6-2ff84cc62b63"),
                             Ativo = true,
-                            CodigoCupom = new Guid("816b7d3b-c767-4451-af22-9deed1d6d846"),
+                            CodigoCupom = new Guid("c7846571-6120-4543-9623-70c749b6f997"),
                             PercentualDesconto = 15m
                         });
                 });
@@ -90,6 +64,9 @@ namespace Carrinho.Compra.Repository.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
 
                     b.Property<Guid>("CarrinhoId")
                         .HasColumnType("uuid");
@@ -102,6 +79,8 @@ namespace Carrinho.Compra.Repository.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CarrinhoId");
+
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("ItensCarrinho");
@@ -110,8 +89,10 @@ namespace Carrinho.Compra.Repository.Migrations
             modelBuilder.Entity("Carrinho.Compra.Domain.Entities.ProdutoEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("DescricaoProduto")
                         .IsRequired()
@@ -135,7 +116,8 @@ namespace Carrinho.Compra.Repository.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("62caf4bd-82e9-4a1a-9878-563fd52093a2"),
+                            Id = new Guid("34d40ed5-a264-45c0-a8ec-825a2a08d9c7"),
+                            Ativo = false,
                             DescricaoProduto = "Notebook Dell Inspiron",
                             ImageUrl = "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
                             PrecoLiquido = 3500.00m,
@@ -143,7 +125,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("68fd356c-dc8d-4ab0-a936-d329a16af941"),
+                            Id = new Guid("52942dc7-cccf-4769-bc19-a3816909f7f1"),
+                            Ativo = false,
                             DescricaoProduto = "Smartphone Samsung Galaxy",
                             ImageUrl = "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
                             PrecoLiquido = 1899.90m,
@@ -151,7 +134,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a426a272-8ec4-4fbf-8a5a-91e1b9664ff8"),
+                            Id = new Guid("3d240408-514f-4801-a32e-05454b2edc85"),
+                            Ativo = false,
                             DescricaoProduto = "Apple AirPods",
                             ImageUrl = "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434",
                             PrecoLiquido = 999.90m,
@@ -159,7 +143,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ddb6ea84-fc8f-4ad3-be2a-06578cb6758e"),
+                            Id = new Guid("9d84926c-4fae-4b07-bb4f-27a5423dfaad"),
+                            Ativo = false,
                             DescricaoProduto = "Teclado Mecânico",
                             ImageUrl = "https://images.unsplash.com/photo-1587829741301-dc798b83add3",
                             PrecoLiquido = 299.90m,
@@ -167,7 +152,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c58b1bad-25f8-4a81-a62a-21887dec7228"),
+                            Id = new Guid("a50d352e-88bd-4ad3-9cb0-c6dbfbd1d981"),
+                            Ativo = false,
                             DescricaoProduto = "Mouse Gamer",
                             ImageUrl = "https://images.unsplash.com/photo-1527814050087-3793815479db",
                             PrecoLiquido = 159.90m,
@@ -175,7 +161,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("caaaa9ea-d3d6-4b4e-bc9b-6f8e212af08d"),
+                            Id = new Guid("05fd5c1e-507c-4843-8956-369eb91e37e1"),
+                            Ativo = false,
                             DescricaoProduto = "Monitor 24 Polegadas",
                             ImageUrl = "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf",
                             PrecoLiquido = 899.90m,
@@ -183,7 +170,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3fc3aac5-9eff-4642-9bbb-75ff3e166efd"),
+                            Id = new Guid("497bc209-f13d-4488-b2ff-2e216a84def9"),
+                            Ativo = false,
                             DescricaoProduto = "Smart TV 50 Polegadas",
                             ImageUrl = "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1",
                             PrecoLiquido = 2499.90m,
@@ -191,7 +179,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("14ab4cf0-21c9-454e-acd1-6ca20bae3bc3"),
+                            Id = new Guid("c5c5aefc-8a3e-450c-b7b4-028f20cbd1a9"),
+                            Ativo = false,
                             DescricaoProduto = "Câmera Digital",
                             ImageUrl = "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
                             PrecoLiquido = 2199.90m,
@@ -199,7 +188,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a0fd9874-2096-46d0-9ba4-23a386c21577"),
+                            Id = new Guid("23d7000e-32a7-44d0-b58f-5aa021eff66d"),
+                            Ativo = false,
                             DescricaoProduto = "Console Gamer",
                             ImageUrl = "https://images.unsplash.com/photo-1606813907291-d86efa9b94db",
                             PrecoLiquido = 3999.90m,
@@ -207,7 +197,8 @@ namespace Carrinho.Compra.Repository.Migrations
                         },
                         new
                         {
-                            Id = new Guid("876993eb-7f0d-4928-95b1-e0803b88707a"),
+                            Id = new Guid("fd9a47a1-882c-47d7-b181-c02252b30d0a"),
+                            Ativo = false,
                             DescricaoProduto = "Headset Gamer",
                             ImageUrl = "https://images.unsplash.com/photo-1599669454699-248893623440",
                             PrecoLiquido = 349.90m,
@@ -215,20 +206,38 @@ namespace Carrinho.Compra.Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Carrinho.Compra.Domain.Entities.CarrinhoEntity", b =>
+            modelBuilder.Entity("CarrinhoEntity", b =>
                 {
-                    b.HasOne("Carrinho.Compra.Domain.Entities.CupomEntity", "Cupom")
-                        .WithMany()
-                        .HasForeignKey("CupomId");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
 
-                    b.Navigation("Cupom");
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("CupomId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("Subtotal")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CupomId");
+
+                    b.ToTable("Carrinhos");
                 });
 
             modelBuilder.Entity("Carrinho.Compra.Domain.Entities.ItemCarrinhoEntity", b =>
                 {
-                    b.HasOne("Carrinho.Compra.Domain.Entities.CarrinhoEntity", "Carrinho")
+                    b.HasOne("CarrinhoEntity", "Carrinho")
                         .WithMany("Itens")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CarrinhoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -243,14 +252,24 @@ namespace Carrinho.Compra.Repository.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("Carrinho.Compra.Domain.Entities.CarrinhoEntity", b =>
+            modelBuilder.Entity("CarrinhoEntity", b =>
                 {
-                    b.Navigation("Itens");
+                    b.HasOne("Carrinho.Compra.Domain.Entities.CupomEntity", "Cupom")
+                        .WithMany()
+                        .HasForeignKey("CupomId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Cupom");
                 });
 
             modelBuilder.Entity("Carrinho.Compra.Domain.Entities.ProdutoEntity", b =>
                 {
                     b.Navigation("ItensCarrinho");
+                });
+
+            modelBuilder.Entity("CarrinhoEntity", b =>
+                {
+                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }
