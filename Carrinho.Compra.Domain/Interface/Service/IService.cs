@@ -7,5 +7,6 @@
         Task<TModel> Add(TModel model);
         Task<bool> Delete(Guid id);
         Task<TModel> Update(TModel model);
+      
     }
 }

@@ -1,11 +1,15 @@
-﻿namespace Carrinho.Compra.Domain.Models
+﻿using Carrinho.Compra.Domain.Entities;
+
+namespace Carrinho.Compra.Domain.Models
 {
     public class ItemCarrinhoModel
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
         public Guid ProdutoId { get; set; }
+        public Guid CarrinhoId { get; set; }           
         public int Quantidade { get; set; }
-        public ProdutoModel? Produto { get; set; } 
+        public virtual ProdutoModel? Produto { get; set; }      
+        public virtual CarrinhoModel? Carrinho { get; set; }    
 
     }
 }

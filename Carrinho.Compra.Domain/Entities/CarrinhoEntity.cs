@@ -1,12 +1,23 @@
-﻿namespace Carrinho.Compra.Domain.Entities
+﻿using Carrinho.Compra.Domain.Entities;
+
+public class CarrinhoEntity : EntityBase
 {
-    public class CarrinhoEntity : EntityBase
+    public CarrinhoEntity()
     {
-        public DateTime DataCriacao { get; set; } 
-        public decimal Subtotal { get; set; }
-        public decimal Total { get; set; }
-        public Guid? CupomId { get; set; }
-        public CupomEntity? Cupom { get; set; }
-        public ICollection<ItemCarrinhoEntity> Itens { get; set; } = new List<ItemCarrinhoEntity>();
+        Itens = new List<ItemCarrinhoEntity>();
+        DataCriacao = DateTime.UtcNow;
     }
+
+    public DateTime DataCriacao { get; set; }
+
+    public decimal Subtotal { get; set; }
+
+    public decimal Total { get; set; }
+
+    public Guid? CupomId { get; set; }
+
+    public CupomEntity? Cupom { get; set; }
+
+    public ICollection<ItemCarrinhoEntity> Itens { get; set; }
 }
+        

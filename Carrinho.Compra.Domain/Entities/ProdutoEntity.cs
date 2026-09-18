@@ -1,6 +1,6 @@
 ﻿namespace Carrinho.Compra.Domain.Entities
 {
-    public class ProdutoEntity :EntityBase
+    public class ProdutoEntity: EntityBase
     {
         public string DescricaoProduto { get; set; } = string.Empty;
         public int QuantidadeEstoque { get; set; }

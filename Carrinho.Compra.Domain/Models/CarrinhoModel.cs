@@ -1,11 +1,10 @@
-﻿using Carrinho.Compra.Domain.Entities;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Carrinho.Compra.Domain.Models
 {
     public class CarrinhoModel
     {
-        public Guid Id  { get; set; } = Guid.NewGuid();  
+        public Guid Id { get; set; } 
         public DateTime DataCriacao { get; set; }   
         public decimal Subtotal { get; set; }   
         public decimal Total { get; set; }

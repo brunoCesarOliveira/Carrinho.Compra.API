@@ -1,8 +1,10 @@
-﻿namespace Carrinho.Compra.Domain.Entities
+﻿public abstract class EntityBase
 {
-    public class EntityBase
+    public Guid Id { get;  set; }
+    public bool Ativo { get; set; }
+    protected EntityBase()
     {
-        public Guid Id { get; set; }
-
+        Id = Guid.NewGuid();
+        
     }
 }
